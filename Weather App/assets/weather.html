@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Hello Everyone</h1>
+    <input type="text" id="place">
+    <button onclick="weather()">Submit</button>
+    <script >console.log(`Namaste!`);
+
+        const API_key = '1c50c46e6297d44ab654beef89810a76';
+        let city ='';
+        
+        async function weather() {
+            city = document.getElementById('place').value;
+            console.log(city);
+            let newPara = document.createElement('p');
+            newPara.textContent = city;
+           
+            document.body.appendChild(newPara);
+            console.log(typeof(city));
+           
+            const response = (await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_key}&units=metric`));
+            console.log(typeof(response));
+            const data = await response.json();
+       
+            console.log('Weather data -> ' , data);
+       
+            newPara = document.createElement('p');
+            newPara.textContent = `${data?.main?.temp.toFixed(2)} °C`;
+       
+            document.body.appendChild(newPara);
+        }</script>
+</body>
+</html>
+<!-- src="index.js" -->
